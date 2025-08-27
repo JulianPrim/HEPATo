@@ -8,7 +8,7 @@
 #   and ATAC-seq peaks around any HGNC gene.
 #
 # Authors     : Julian Primig (Sorbonne Université)
-# Repository  : https://github.com/USER/REPO
+# Repository  : https://github.com/JulianPrim/HepG2-ChIP-Viewer
 # Date        : 2025-08-27
 # Requirements: R (>=4.2), Bioconductor packages (EnsDb.Hsapiens.v86, etc.)
 # Made with   : R 4.5.1, ChatGPT 5
@@ -103,7 +103,7 @@ ui <- page_navbar(
       ".bs-card-full-screen .plot-wrapper{height:calc(100vh - 40px);} ",
       ".bs-card-full-screen .hide-on-fullscreen{display:none !important;} ",
       
-      "/* TF legend (scrollable) */",
+      "/* TF legend */",
       ".tf-legend{max-height:180px;overflow:auto;padding-top:.5rem;border-top:1px solid rgba(0,0,0,.08);} ",
       ".tf-legend-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:6px 16px;} ",
       ".tf-item{display:flex;align-items:center;gap:8px;font-size:.95rem;} ",
@@ -138,7 +138,7 @@ ui <- page_navbar(
                  numericInput("minscore", "Min score", value = 0, min = 0, step = 1),
                  sliderInput("ptsize", "Point size", min = 4, max = 14, value = 8, step = 1),
                  checkboxInput("showccre", "Show cCREs", value = TRUE),
-                 checkboxInput("showlegend", "Show TF/mark legend (scrollable)", value = TRUE),
+                 checkboxInput("showlegend", "Show TF/mark legend", value = TRUE),
                  actionButton("go", "Display", class = "btn btn-primary w-100")
         )
       ),
@@ -201,7 +201,7 @@ ui <- page_navbar(
   
   nav_spacer(),
   nav_item(tags$a(class="nav-link", target="_blank",
-                  href="https://github.com/USER/REPO", icon("github"), " GitHub"))
+                  href="https://github.com/JulianPrim/HepG2-ChIP-Viewer", icon("github"), " GitHub"))
 )
 
 # ---- SERVER ----
