@@ -4,7 +4,7 @@ An interactive R Shiny viewer for HepG2 cells that overlays ENCODE cCREs with Ch
 
 
 ---------------------------------------------------------------------------------------
-How to run the viewer locally
+# How to run the viewer locally
 
 Go to the project’s GitHub → click on "Releases" and download the four pre-formatted ChIP-Atlas files.
 Place them in the same folder as your app (expected names):
