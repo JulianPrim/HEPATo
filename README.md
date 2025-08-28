@@ -1,10 +1,10 @@
 
-### HepG2-ChIP-Viewer
+# HepG2-ChIP-Viewer
 An interactive R Shiny viewer for HepG2 cells that overlays ENCODE cCREs with ChIP-Atlas transcription factors, histone marks, and ATAC-seq around any HGNC gene to guide regulatory network studies in liver cancer.
 
 
 ---------------------------------------------------------------------------------------
-# How to run the viewer locally
+## How to run the viewer locally
 
 Go to the project’s GitHub → click on "Releases" and download the four pre-formatted ChIP-Atlas files.
 Place them in the same folder as your app (expected names):
@@ -29,16 +29,16 @@ Enjoy it !
 
 
 
-# Author     : Julian Primig (Sorbonne Université)
+## Author     : Julian Primig (Sorbonne Université)
 Date        : 2025-08-27,
 Requirements: R (>=4.2), Bioconductor packages (EnsDb.Hsapiens.v86, etc.)
 Made with   : R 4.5.1, ChatGPT 5
 
-# Data sources:
+## Data sources:
    - ENCODE Registry of cCREs (hg38), file ENCFF389ZVZ.bigBed, lab: Zhiping Weng, UMass
    - ChIP-Atlas Peak Browser (https://chip-atlas.org) Accessed: 2025-07
    -  Dataset type: ChIP-seq (TFs, histone marks), ATAC-seq
    - Reference: Oki et al., Nucleic Acids Research 2024 (doi:10.1093/nar/gkae358)
 
-# Notes:
+### Notes:
 ChIP-Atlas data are continuously updated, analyses correspond to the snapshot available on the access date above.
