@@ -42,3 +42,22 @@ Made with   : R 4.5.1, ChatGPT 5
 
 ### Notes:
 ChIP-Atlas data are continuously updated, analyses correspond to the snapshot available on the access date above.
+All peak tracks are provided as BED-like tables using a uniform 6-column schema: chrom start end SRX gene score.
+
+chrom, start, end define the genomic interval (hg38).
+
+SRX is the SRA experiment accession from ChIP-Atlas.
+
+gene names the assayed factor/mark (e.g., a TF or histone modification).
+
+score is the peak score reported by the source.
+
+This repository includes three HepG2 datasets in that format:
+
+HepG2_formatted_50_AllAg.bed — ChIP-Atlas TFs (antibodies against TFs); 1766 SRX datasets.
+
+HepG2_formatted_50_His.bed — ChIP-Atlas histone marks; 172 SRX datasets.
+
+HepG2_formatted_50_ATAC.bed — ATAC-seq peaks/scores; 50 SRX datasets.
+
+Place these files next to app.R. The app loads whichever file corresponds to the selected track and overlays peaks with ENCODE cCREs around the requested HGNC gene. (SRX counts reflect the July-2025 ChIP-Atlas snapshot and may change as the resource updates.)
