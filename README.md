@@ -23,3 +23,5 @@ If the Run App button is buggy on your setup, use shiny::runApp(".") instead.
 
 Enjoy it !
 ---------------------------------------------------------------------------------------
+<img width="1467" height="881" alt="image" src="https://github.com/user-attachments/assets/bacfd96a-7bb0-4546-a066-02da8c15d468" />
+<img width="1421" height="755" alt="Capture d’écran 2025-08-28 à 14 22 32" src="https://github.com/user-attachments/assets/50c3f209-c69f-4919-8fce-5f9b0b4f252f" />
