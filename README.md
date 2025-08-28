@@ -40,31 +40,32 @@ Made with   : R 4.5.1, ChatGPT 5
    -  Dataset type: ChIP-seq (TFs, histone marks), ATAC-seq
    - Reference: Oki et al., Nucleic Acids Research 2024 (doi:10.1093/nar/gkae358)
 
-Notes & data format
 
-ChIP-Atlas is continuously updated. Analyses here reflect the snapshot listed above (accessed July-2025).
+## Notes & data format
 
-All peak tracks use a uniform 6-column BED-like schema:
+> **ChIP-Atlas is continuously updated.** Analyses here reflect the snapshot listed above (accessed **July-2025**).
 
-chrom  start  end  SRX  gene  score
+All peak tracks use a **uniform 6-column BED-like schema**:
 
 
-chrom, start, end — genomic interval (hg38)
+- `chrom`, `start`, `end` — genomic interval (hg38)  
+- `SRX` — SRA experiment accession from ChIP-Atlas  
+- `gene` — assayed factor/mark (e.g., TF name or histone modification)  
+- `score` — peak score reported by the source
 
-SRX — SRA experiment accession from ChIP-Atlas
+## Included HepG2 datasets
 
-gene — assayed factor/mark (e.g., TF name or histone modification)
+| File                           | Track                                  | SRX datasets |
+|--------------------------------|----------------------------------------|--------------|
+| `HepG2_formatted_50_AllAg.bed` | ChIP-Atlas **TFs** (antibodies to TFs) | **1766**     |
+| `HepG2_formatted_50_His.bed`   | ChIP-Atlas **histone marks**           | **172**      |
+| `HepG2_formatted_50_ATAC.bed`  | **ATAC-seq** peaks/scores              | **50**       |
 
-score — peak score reported by the source
+## Usage
 
-Included HepG2 datasets
-File	Track	SRX datasets
-HepG2_formatted_50_AllAg.bed	ChIP-Atlas TFs (antibodies to TFs)	1766
-HepG2_formatted_50_His.bed	ChIP-Atlas histone marks	172
-HepG2_formatted_50_ATAC.bed	ATAC-seq peaks/scores	50
-Usage
+Place these files **next to** `app.R`.  
+The app will load the file that matches the selected **track** and overlay those peaks with **ENCODE cCREs** around the requested **HGNC** gene.
 
-Place these files next to app.R.
-The app will load the file that matches the selected track and overlay those peaks with ENCODE cCREs around the requested HGNC gene.
+> SRX counts reflect the July-2025 ChIP-Atlas snapshot and may change as the resource updates.
 
-SRX counts reflect the July-2025 ChIP-Atlas snapshot and may change as the resource updates.
+
