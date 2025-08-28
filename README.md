@@ -30,7 +30,7 @@ Enjoy it !
 
 
 # Author     : Julian Primig (Sorbonne Université)
-Date        : 2025-08-27
+Date        : 2025-08-27,
 Requirements: R (>=4.2), Bioconductor packages (EnsDb.Hsapiens.v86, etc.)
 Made with   : R 4.5.1, ChatGPT 5
 
@@ -41,4 +41,4 @@ Made with   : R 4.5.1, ChatGPT 5
    - Reference: Oki et al., Nucleic Acids Research 2024 (doi:10.1093/nar/gkae358)
 
 # Notes:
-#   ChIP-Atlas data are continuously updated; analyses correspond to the snapshot available on the access date above.
+ChIP-Atlas data are continuously updated, analyses correspond to the snapshot available on the access date above.
