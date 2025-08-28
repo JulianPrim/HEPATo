@@ -25,7 +25,14 @@
 #   to the snapshot available on the access date above.
 ###############################################################
 
-
+# ---- Inputs on disk (expected in the working directory) ----
+# - cCREs from ENCODE (hg38, bigBed):
+#     ENCFF389ZVZ_cCREs.bigBed
+# - Peak-like BEDs (same 6-column format: chrom, start, end, SRX, gene, score)
+#     HepG2_formatted_50_AllAg.bed   # ChIP-Atlas TFs (antibodies against TFs), 1766 SRX datasets
+#     HepG2_formatted_50_His.bed     # ChIP-Atlas histone marks, 172 SRX datasets
+#     HepG2_formatted_50_ATAC.bed    # ATAC-seq peaks/score, 50 SRX datasets
+# ---- ----  ----  ----  ----  ----  ----  ----  ----  ----  ----
 
 
 # ---- Packages ----
@@ -68,7 +75,7 @@ ccres <- import("ENCFF389ZVZ_cCREs.bigBed", format = "bigBed")
 ccres$creClass        <- sub(",.*", "", ccres$ccre)
 seqlevelsStyle(ccres) <- "UCSC"; genome(ccres) <- "hg38"; seqlengths(ccres) <- NA
 
-# ---- THEME (pastel green but no navbar override) ----
+# ---- THEME ----
 PASTEL <- "#94d2bd"
 theme <- bs_theme(
   version = 5,
