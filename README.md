@@ -6,16 +6,20 @@ An interactive R Shiny viewer for HepG2 cells that overlays ENCODE cCREs with Ch
 ---------------------------------------------------------------------------------------
 ## How to run the viewer locally
 
-Go to the project’s GitHub → click on "Releases" and download the four pre-formatted ChIP-Atlas files.
+Go to the project’s GitHub → click on "Releases" and download the three pre-formatted ChIP-Atlas and the ENCODE cCREs bed files.
 Place them in the same folder as your app (expected names):
 HepG2_formatted_50_AllAg.bed, HepG2_formatted_50_His.bed, HepG2_formatted_50_ATAC.bed, and the cCRE bigBed.
 
 In RStudio: File → New File → Shiny Web App… (single-file app).
 Name it as you like and create it.
 
-Replace the template with the app code (the “Raw code #2”) and save as app.R in that folder.
+Replace the template with the app code (the “Raw_codeV2.0.0”) and save as app.R in that folder.
 
-Install the required packages mentioned at the top of the script, then to run it, copy: shiny::runApp(".") ; in the board (console). 
+Install the required packages mentioned at the top of the script, then to run it, copy: 
+
+*shiny::runApp(".")*
+
+; in the board (console). 
 
 Or run the script line-by-line (Shift+Enter).
 
