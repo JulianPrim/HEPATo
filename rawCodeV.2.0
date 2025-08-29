@@ -35,6 +35,10 @@
 # ---- ----  ----  ----  ----  ----  ----  ----  ----  ----  ----
 
 
+## install all the required packages
+options(repos="https://cran.rstudio.com"); if (!requireNamespace("BiocManager", quietly=TRUE)) install.packages("BiocManager"); install.packages(c("shiny","bslib","dplyr","plotly","RColorBrewer","readr","tibble")); BiocManager::install(c("EnsDb.Hsapiens.v86","GenomicRanges","IRanges","rtracklayer"), ask=FALSE)
+
+
 # ---- Packages ----
 library(shiny)
 library(bslib)
