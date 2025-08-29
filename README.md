@@ -1,5 +1,5 @@
 
-# HepG2-ChIP-Viewer
+# HEPATo (HEpatocyte Promoter Analysis Tool)
 An interactive R Shiny viewer for HepG2 cells that overlays ENCODE cCREs with ChIP-Atlas transcription factors, histone marks, and ATAC-seq around any HGNC gene to guide regulatory network studies in liver cancer.
 
 
