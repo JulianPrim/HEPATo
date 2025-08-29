@@ -3,46 +3,33 @@
 ###############################################################
 # Description :
 #   Interactive R Shiny app for visualizing regulatory landscapes
-#   in HepG2 hepatocellular carcinoma cells.
-#   Explore ENCODE cCREs, ChIP-Atlas TFs, histone marks,
-#   and ATAC-seq peaks around any HGNC gene.
+#   in HepG2 hepatocellular carcinoma cells. Explore ENCODE cCREs,
+#   ChIP-Atlas TFs, histone marks, and ATAC-seq around any HGNC gene.
 #
-# Authors     : Julian Primig (Sorbonne Université)
+# Author      : Julian Primig (Sorbonne Université)
 # Repository  : https://github.com/JulianPrim/HepG2-ChIP-Viewer
 # Date        : 2025-08-27
 # Requirements: R (>=4.2), Bioconductor packages (EnsDb.Hsapiens.v86, etc.)
-# Made with   : R 4.5.1, ChatGPT 5
-#
-# Data sources:
-#   - ENCODE Registry of cCREs (hg38), file ENCFF389ZVZ.bigBed, lab: Zhiping Weng, UMass
-#   - ChIP-Atlas Peak Browser (https://chip-atlas.org)
-#       Accessed: 2025-07
-#       Dataset type: ChIP-seq (TFs, histone marks), ATAC-seq
-#       Reference: Oki et al., Nucleic Acids Research 2024 (doi:10.1093/nar/gkae358)
-#
-# Notes:
-#   ChIP-Atlas data are continuously updated; analyses correspond
-#   to the snapshot available on the access date above.
 ###############################################################
 
-# ---- Inputs on disk (expected in the working directory) ----
-# - cCREs from ENCODE (hg38, bigBed):
-#     ENCFF389ZVZ_cCREs.bigBed
-# - Peak-like BEDs (same 6-column format: chrom, start, end, SRX, gene, score)
-#     HepG2_formatted_50_AllAg.bed   # ChIP-Atlas TFs (antibodies against TFs), 1766 SRX datasets
-#     HepG2_formatted_50_His.bed     # ChIP-Atlas histone marks, 172 SRX datasets
-#     HepG2_formatted_50_ATAC.bed    # ATAC-seq peaks/score, 50 SRX datasets
-# ---- ----  ----  ----  ----  ----  ----  ----  ----  ----  ----
+# ---- Inputs expected in working directory ----
+#   ENCFF389ZVZ_cCREs.bigBed
+#   HepG2_formatted_50_AllAg.bed   (TFs)
+#   HepG2_formatted_50_His.bed     (Histone marks)
+#   HepG2_formatted_50_ATAC.bed    (ATAC-seq)
+# ------------------------------------------------------------
 
-
-## install all the required packages
-options(repos="https://cran.rstudio.com"); if (!requireNamespace("BiocManager", quietly=TRUE)) install.packages("BiocManager"); install.packages(c("shiny","bslib","dplyr","plotly","RColorBrewer","readr","tibble")); BiocManager::install(c("EnsDb.Hsapiens.v86","GenomicRanges","IRanges","rtracklayer"), ask=FALSE)
-
+# Install packages
+options(repos="https://cran.rstudio.com")
+if (!requireNamespace("BiocManager", quietly=TRUE)) install.packages("BiocManager")
+install.packages(c("shiny","bslib","dplyr","plotly","RColorBrewer","readr","tibble"))
+BiocManager::install(c("EnsDb.Hsapiens.v86","GenomicRanges","IRanges","rtracklayer","AnnotationFilter"), ask=FALSE)
 
 # ---- Packages ----
 library(shiny)
 library(bslib)
 library(EnsDb.Hsapiens.v86)
+library(AnnotationFilter)   
 library(GenomicRanges)
 library(IRanges)
 library(rtracklayer)
@@ -69,8 +56,8 @@ plot_title_for_mode <- function(mode, gene){
   paste0(prefix, " in ", gene, " genomic region")
 }
 safe_palette <- function(n){
-  if(n <= 0) character(0)
-  else if(n <= 8) brewer.pal(n, "Dark2")
+  if (n <= 0) character(0)
+  else if (n <= 8) brewer.pal(n, "Dark2")
   else colorRampPalette(brewer.pal(8, "Dark2"))(n)
 }
 
@@ -92,36 +79,29 @@ theme <- bs_theme(
 # ---- UI ----
 ui <- page_navbar(
   theme = theme,
-  title = tags$span("HEPATo (HepG2 Promoter Analysis Tool"),
-  
-  # CSS (no navbar styling here)
+  title = tags$span("HEPATo: HepG2 Promoter Analysis Tool"),
+  # Assure aussi le titre de l’onglet navigateur
+  tags$head(tags$title("HEPATo: HepG2 Promoter Analysis Tool")),
+  # CSS
   tags$head(
     tags$style(HTML(paste0(
       ".app-title{font-family:'Helvetica Neue',Arial,sans-serif;font-weight:800;font-size:3rem;margin:0 0 .25rem 0;} ",
       ".app-subtitle-lead{color:#111;font-size:1.20rem;font-style:italic;margin:.25rem 0 .5rem 0;} ",
       ".app-subtitle-more{color:#111;font-size:1.05rem;font-style:italic;margin:0 0 1rem 0;} ",
-      
-      "/* cCRE legend */",
       ".ccre-legend{display:flex;flex-wrap:wrap;align-items:center;gap:12px;margin:.25rem 0 .5rem 0;} ",
       ".ccre-legend-title{font-weight:600;margin-right:.25rem;} ",
       ".ccre-item{display:inline-flex;align-items:center;gap:6px;} ",
       ".ccre-swatch{width:12px;height:12px;border-radius:2px;border:1px solid rgba(0,0,0,.25);display:inline-block;} ",
       ".ccre-help-toggle{font-size:.9em;color:#0b3d91;text-decoration:underline;cursor:pointer;margin-left:8px;} ",
       ".ccre-help{font-size:.9em;color:#333;margin:.25rem 0 .5rem 0;} ",
-      
-      "/* plot heights */",
       ".plot-wrapper{height:72vh;min-height:520px;} ",
       ".bs-card-full-screen .plot-wrapper{height:calc(100vh - 40px);} ",
       ".bs-card-full-screen .hide-on-fullscreen{display:none !important;} ",
-      
-      "/* TF legend */",
       ".tf-legend{max-height:180px;overflow:auto;padding-top:.5rem;border-top:1px solid rgba(0,0,0,.08);} ",
       ".tf-legend-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:6px 16px;} ",
       ".tf-item{display:flex;align-items:center;gap:8px;font-size:.95rem;} ",
       ".tf-swatch{width:10px;height:10px;border-radius:50%;border:1px solid rgba(0,0,0,.25);display:inline-block;} ",
       ".tf-legend-title{font-weight:600;margin-bottom:.25rem;} ",
-      
-      "/* notes */",
       ".note-box{font-size:.9em;background:#f8f9fb;border-left:4px solid ", PASTEL, ";padding:.5rem .7rem;border-radius:4px;color:#111;}"
     )))
   ),
@@ -136,16 +116,12 @@ ui <- page_navbar(
                  tags$h2("Inputs", class="h5 fw-bold mb-3"),
                  textInput("gene", "Gene name (HGNC)", "EXOSC10"),
                  numericInput("flank", "Flank (bp)", 2000, min = 0),
-                 radioButtons(
-                   "mode", "Track:", inline = TRUE,
-                   choices = c("Transcription factors"="tf","Histone marks"="his","ATAC-seq"="atac"),
-                   selected = "tf"
-                 ),
-                 selectizeInput(
-                   "filter_factor", "Filter TF/mark (optional)",
-                   choices = NULL, multiple = TRUE,
-                   options = list(placeholder = "All in region")
-                 ),
+                 radioButtons("mode", "Track:", inline = TRUE,
+                              choices = c("Transcription factors"="tf","Histone marks"="his","ATAC-seq"="atac"),
+                              selected = "tf"),
+                 selectizeInput("filter_factor", "Filter TF/mark (optional)",
+                                choices = NULL, multiple = TRUE,
+                                options = list(placeholder = "All in region")),
                  numericInput("minscore", "Min score", value = 0, min = 0, step = 1),
                  sliderInput("ptsize", "Point size", min = 4, max = 14, value = 8, step = 1),
                  checkboxInput("showccre", "Show cCREs", value = TRUE),
@@ -154,50 +130,39 @@ ui <- page_navbar(
         )
       ),
       
-      # Header text
+      # Header
       card(
         class = "shadow-sm rounded-3 border-0 mb-3",
         card_body(
           tags$div(
-            tags$div(class="app-title", "HepG2 ChIP Viewer"),
-            tags$div(class="app-subtitle-lead",
+            tags$div(class = "app-title", "HEPATo: HepG2 Promoter Analysis Tool"),
+            tags$div(class = "app-subtitle-lead",
                      "Interactive viewer for exploring regulatory landscapes in HepG2 cells. ",
                      "Browse ENCODE cCREs alongside ChIP-Atlas transcription-factor binding, histone marks, and ATAC-seq around any HGNC gene. ",
-                     "Configure the flanking window, filter by factor/mark, and inspect MACS2 peak scores."
-            ),
-            tags$div(class="app-subtitle-more text-muted",
+                     "Configure the flanking window, filter by factor/mark, and inspect MACS2 peak scores."),
+            tags$div(class = "app-subtitle-more text-muted",
                      "With plotly (v2.11.1), you can lasso-select points, zoom, and pan. ",
-                     "Enter a gene and click “Display”. ",
-                     "Each point corresponds to a ChIP-seq experiment (SRX); hover for details and open the SRX on ChIP-Atlas."
-            )
+                     "Enter a gene and click \"Display\". ",
+                     "Each point corresponds to a ChIP-seq experiment (SRX); hover for details and open the SRX on ChIP-Atlas.")
           )
         )
       ),
       
-      # Plot card (full-screen = plot only)
+      # Plot card
       card(
         full_screen = TRUE,
         class = "shadow-sm rounded-3 border-0 mb-3",
         card_body(
-          # HOT promoter note toggle ABOVE the plot (hidden in fullscreen)
           div(class="hide-on-fullscreen",
               actionLink("toggle_hot", "Note about hotspot promoters", class = "link-primary"),
-              uiOutput("hotNote")
-          ),
-          # Plot
-          div(class="plot-wrapper",
-              plotlyOutput("plot", height = "100%")
-          ),
-          # Extras under plot (all hidden in fullscreen)
+              uiOutput("hotNote")),
+          div(class="plot-wrapper", plotlyOutput("plot", height = "100%")),
           div(class="hide-on-fullscreen",
               uiOutput("ccreLegend"),
               uiOutput("tfLegend"),
               div(class="mt-2",
-                  actionLink("toggle_note", "Note about experimental conditions",
-                             class = "link-primary"),
-                  uiOutput("noteBox")
-              )
-          )
+                  actionLink("toggle_note", "Note about experimental conditions", class = "link-primary"),
+                  uiOutput("noteBox")))
         )
       ),
       
@@ -234,14 +199,12 @@ server <- function(input, output, session){
     file <- currentBed()
     validate(need(file.exists(file), paste0("Missing file: ", file)))
     
-    df <- read_tsv(
-      file, col_names = c("chrom","start","end","SRX","gene","score"),
-      show_col_types = FALSE
-    ) %>% mutate(
-      start = as.numeric(start),
-      end   = as.numeric(end),
-      score = suppressWarnings(as.numeric(score))
-    )
+    df <- read_tsv(file,
+                   col_names = c("chrom","start","end","SRX","gene","score"),
+                   show_col_types = FALSE) %>%
+      mutate(start = as.numeric(start),
+             end   = as.numeric(end),
+             score = suppressWarnings(as.numeric(score)))
     
     gr_df <- GRanges(df$chrom, IRanges(df$start, df$end))
     sel   <- queryHits(findOverlaps(gr_df, gr0))
@@ -318,7 +281,7 @@ server <- function(input, output, session){
       marker = list(size = input$ptsize, opacity = 1),
       color = if (input$mode == "atac") I("black") else ~gene,
       colors = if (input$mode == "atac") NULL else tf_colors,
-      showlegend = FALSE  # custom legend instead
+      showlegend = FALSE
     ) %>%
       layout(
         title  = list(text = paste0("<b>", plot_title_for_mode(input$mode, input$gene), "</b>")),
@@ -332,7 +295,7 @@ server <- function(input, output, session){
       config(displaylogo = FALSE, responsive = TRUE)
   })
   
-  # cCRE legend (contextual) + clickable color help; title without "(in region)"
+  # cCRE legend (contextual) + clickable color help
   ccre_help_open <- reactiveVal(FALSE)
   observeEvent(input$ccre_help_toggle, { ccre_help_open(!ccre_help_open()) })
   output$ccreLegend <- renderUI({
@@ -384,13 +347,11 @@ server <- function(input, output, session){
     items <- lapply(names(cols), function(name) {
       tags$div(class="tf-item",
                tags$span(class="tf-swatch", style = paste0("background:", cols[[name]], ";")),
-               tags$span(name)
-      )
+               tags$span(name))
     })
     tags$div(class="tf-legend",
              tags$div(class="tf-legend-title", "TF/mark legend:"),
-             tags$div(class="tf-legend-grid", items)
-    )
+             tags$div(class="tf-legend-grid", items))
   })
   
   # HOT promoter note (above plot)
@@ -398,21 +359,18 @@ server <- function(input, output, session){
   observeEvent(input$toggle_hot, { hot_open(!hot_open()) })
   output$hotNote <- renderUI({
     if (!hot_open()) return(NULL)
-    tags$div(class="note-box",
-             HTML("
+    tags$div(class="note-box", HTML("
 <ul style='margin:6px 0 0 18px'>
-  <li><b>Highly open, strongly transcribed promoters</b> (CpG islands, Pol II, H3K4me3/H3K27ac) yield non-specific enrichments (“phantom peaks”): cross-linking captures co-occupants or 3D neighbors, not necessarily sequence-specific DNA binding.</li>
-  <li><b>Physicochemical features of HOT regions</b> (high GC/CpG, R-loops, G-quadruplexes) can artifactually enrich IP and inflate MACS2 scores.</li>
-  <li><b>Large ZNF family</b> and shared epitopes/cofactors lead to frequent co-IP at transcriptional hubs. Peaks here do not by themselves prove motif-specific binding.</li>
-  <li><b>Multi-study aggregation</b> visually amplifies the apparent ubiquity of Ags at HOT promoters.</li>
-  <li><b>3D proximity/looping</b> can project signals into exons near active TSSs. For further research see PMID: 31114922, 24173036 and 26117547/li>
+  <li><b>Highly open, strongly transcribed promoters</b> (CpG islands, Pol II, H3K4me3/H3K27ac) can yield non-specific enrichments (“phantom peaks”).</li>
+  <li><b>Physicochemical features of HOT regions</b> (high GC/CpG, R-loops, G-quadruplexes) may inflate MACS2 scores.</li>
+  <li><b>Large ZNF family</b> and shared cofactors lead to frequent co-IP at transcriptional hubs.</li>
+  <li><b>Multi-study aggregation</b> can amplify apparent ubiquity at HOT promoters.</li>
+  <li><b>3D proximity/looping</b> may project signal near active TSSs. See PMIDs: 31114922, 24173036, 26117547.</li>
 </ul>
 <div style='margin-top:6px;font-size:0.9em;color:#555'>
   Advice: check motif enrichment and peak centering for biologically relevant targets.
 </div>
-")
-             
-    )
+"))
   })
   
   # Treatments note (below plot)
@@ -440,4 +398,3 @@ server <- function(input, output, session){
 }
 
 shinyApp(ui, server)
-
