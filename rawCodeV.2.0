@@ -1,5 +1,5 @@
 ###############################################################
-#                  HepG2 ChIP Viewer (Shiny)                  #
+#       HEPATo (HepG2 Promoter Analysis Tool)                 #
 ###############################################################
 # Description :
 #   Interactive R Shiny app for visualizing regulatory landscapes
@@ -88,7 +88,7 @@ theme <- bs_theme(
 # ---- UI ----
 ui <- page_navbar(
   theme = theme,
-  title = tags$span("HepG2 ChIP Viewer"),
+  title = tags$span("HEPATo (HepG2 Promoter Analysis Tool"),
   
   # CSS (no navbar styling here)
   tags$head(
