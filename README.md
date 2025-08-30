@@ -15,7 +15,7 @@ Name it as you like and create it.
 
 Replace the template with the app code (the “Raw_codeV2.0.0”) and save as app.R in that folder.
 
-Install the required packages mentioned at the top of the script, then to run it click on "Run App"
+The script starts with a package installation chunk. Use it once (click Run App), then comment it out (#) to prevent reinstalling packages on later runs.
 
 Or run the script line-by-line (Command+Enter for mac).
 
