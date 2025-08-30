@@ -27,7 +27,7 @@ Enjoy it !
 <img width="1421" height="755" alt="Capture d’écran 2025-08-28 à 14 22 32" src="https://github.com/user-attachments/assets/50c3f209-c69f-4919-8fce-5f9b0b4f252f" />
 <img width="935" height="246" alt="image" src="https://github.com/user-attachments/assets/5d73ab66-cde9-4035-a090-8fe9a80cc092" />
 
-The legend is not exhaustive
+The legend is not exhaustive here
 
 
 
