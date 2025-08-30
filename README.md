@@ -17,13 +17,13 @@ Replace the template with the app code (the “Raw_codeV2.0.0”) and save as ap
 
 Install the required packages mentioned at the top of the script, then to run it click on "Run App"
 
-Or run the script line-by-line (Shift+Enter).
+Or run the script line-by-line (Command+Enter for mac).
 
 If the Run App button is buggy on your setup, use shiny::runApp(".") instead.
 
 Enjoy it !
 ---------------------------------------------------------------------------------------
-<img width="1467" height="881" alt="image" src="https://github.com/user-attachments/assets/bacfd96a-7bb0-4546-a066-02da8c15d468" />
+<img width="1464" height="897" alt="image" src="https://github.com/user-attachments/assets/ef4ba825-aa16-4d1e-9d9f-072b2a5e815b" />
 <img width="1421" height="755" alt="Capture d’écran 2025-08-28 à 14 22 32" src="https://github.com/user-attachments/assets/50c3f209-c69f-4919-8fce-5f9b0b4f252f" />
 <img width="935" height="246" alt="image" src="https://github.com/user-attachments/assets/5d73ab66-cde9-4035-a090-8fe9a80cc092" />
 
