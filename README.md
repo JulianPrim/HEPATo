@@ -6,22 +6,20 @@ An interactive R Shiny viewer for HepG2 cells that overlays ENCODE cCREs with Ch
 ---------------------------------------------------------------------------------------
 ## How to run the viewer locally
 
-Go to the project’s GitHub → click on "Releases" and download the three pre-formatted ChIP-Atlas and the ENCODE cCREs bed files.
+In RStudio (not R), click on File -> New File -> Shiny Web App… (single-file app).
+Name it as you like (HEPATo) and create it. This will create a folder on your device with the name you chose. 
+
+Go to the project’s GitHub -> click on "Releases" and download the three pre-formatted ChIP-Atlas and the ENCODE cCREs bed files.
 Place them in the same folder as your app (expected names):
 HepG2_formatted_50_AllAg.bed, HepG2_formatted_50_His.bed, HepG2_formatted_50_ATAC.bed, and the cCRE bigBed.
 
-In RStudio: File → New File → Shiny Web App… (single-file app).
-Name it as you like and create it.
-
-Replace the template with the app code (the “Raw_codeV2.0.0”) and save as app.R in that folder.
+Replace (copy-paste) the template with the app code (the “Raw_codeV2.0.0”) and save as app.R in that folder.
 
 The script starts with a package installation chunk. Use it once (click Run App), then comment it out (#) to prevent reinstalling packages on later runs.
 
-Or run the script line-by-line (Command+Enter for mac).
+Or run the script line by line (Command+Enter for mac).
 
-If the Run App button is buggy on your setup, use shiny::runApp(".") instead.
-
-Enjoy it !
+If you’re using this viewer, please read the notes at the end. Enjoy!
 ---------------------------------------------------------------------------------------
 <img width="1468" height="893" alt="image" src="https://github.com/user-attachments/assets/5e51c308-cea9-40ef-b48e-de037f776258" />
 <img width="1421" height="755" alt="Capture d’écran 2025-08-28 à 14 22 32" src="https://github.com/user-attachments/assets/50c3f209-c69f-4919-8fce-5f9b0b4f252f" />
@@ -70,8 +68,12 @@ The app will load the file that matches the selected **track** and overlay those
 
 > SRX counts reflect the July-2025 ChIP-Atlas snapshot and may change as the resource updates.
 
-## Notes 
+## Caution notes 
 
 The error "subscript out of bound" in the legend happens when the user selects less than 3 TFs. 
 
 In this plot, points are placed at the center of each ChIP-seq peak rather than the summit, since the ChIP-Atlas BED files used here don’t provide summit positions. As a result, the x-coordinate is informative for regional localization but not precise enough for base-pair alignment to exact predicted binding sites. Overlapping peaks can have different genomic lengths. Since positions are drawn at the peak midpoint, they won’t coincide exactly when you zoom in. We recommend checking the genomic coordinates for any point of interest.
+
+Hotspot promoters highly transcribed and accessible are prone to “phantom peaks” arising from biochemical artifacts. Even though the data are from wet lab experiments, they should be considered exploratory leads for cancer regulatory network research. 
+
+Contact the corresponding author of the review for any questions, we're happy to answer. 
