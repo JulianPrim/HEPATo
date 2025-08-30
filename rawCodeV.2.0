@@ -7,7 +7,7 @@
 #   ChIP-Atlas TFs, histone marks, and ATAC-seq around any HGNC gene.
 #
 # Author      : Julian Primig (Sorbonne Université)
-# Repository  : https://github.com/JulianPrim/HepG2-ChIP-Viewer
+# Repository  : https://github.com/JulianPrim/HEPATo
 # Date        : 2025-08-27
 # Requirements: R (>=4.2), Bioconductor packages (EnsDb.Hsapiens.v86, etc.)
 ###############################################################
@@ -177,7 +177,7 @@ ui <- page_navbar(
   
   nav_spacer(),
   nav_item(tags$a(class="nav-link", target="_blank",
-                  href="https://github.com/JulianPrim/HepG2-ChIP-Viewer", icon("github"), " GitHub"))
+                  href="https://github.com/JulianPrim/HEPATo", icon("github"), " GitHub"))
 )
 
 # ---- SERVER ----
