@@ -15,11 +15,7 @@ Name it as you like and create it.
 
 Replace the template with the app code (the “Raw_codeV2.0.0”) and save as app.R in that folder.
 
-Install the required packages mentioned at the top of the script, then to run it, copy: 
-
-*shiny::runApp(".")*
-
-; in the board (console). 
+Install the required packages mentioned at the top of the script, then to run it click on "Run App"
 
 Or run the script line-by-line (Shift+Enter).
 
@@ -36,7 +32,7 @@ Enjoy it !
 ## Author     : Julian Primig (Sorbonne Université)
 Date        : 2025-08-27,
 Requirements: R (>=4.2), Bioconductor packages (EnsDb.Hsapiens.v86, etc.)
-Made with   : R 4.5.1, ChatGPT 5
+Made with   : R 4.5.1, ChatGPT 5 (used for code syntax and development)
 
 ## Data sources:
    - ENCODE Registry of cCREs (hg38), file ENCFF389ZVZ.bigBed, lab: Zhiping Weng, UMass
