@@ -1,0 +1,78 @@
+# Here is the code used for figure XX in the EXOSC10 Saint et al. 2025 review
+# --------------------------------------------------------------------------------
+# Date: 30/08/25
+# Author: Julian Primig
+# Made with: EPD search motif tool (last update 10/2019) (https://epd.expasy.org/cgi-bin/epd/get_doc?db=hgEpdNew&format=genome&entry=EXOSC10_1)
+############ R.4.5.1: coding
+############ ChatGPT5: assistance in code syntax and development
+# Note: Predicted binding sites relative to the EXOSC10 TSS were extracted from EPD for the selected transcription factors and compiled into a CSV used by this code.
+# --------------------------------------------------------------------------------
+
+# ---- Packages ----
+library(readr)
+library(dplyr)
+library(ggplot2)
+library(scales)
+
+# ---- Data ----
+df <- read_csv("EXOSC10_TFBS.csv", show_col_types = FALSE)
+
+df <- df %>%
+  mutate(
+    p_num   = as.numeric(p_value_threshold),
+    p_class = case_when(
+      p_num <= 1e-5 ~ "1e-5",
+      p_num <= 1e-4 ~ "1e-4",
+      p_num <= 1e-3 ~ "1e-3",
+      TRUE          ~ NA_character_
+    ),
+    p_class = factor(p_class, levels = c("1e-5","1e-4","1e-3"))
+  )
+
+tf_levels <- unique(df$TF)
+df$TF <- factor(df$TF, levels = tf_levels)
+
+pad  <- 100
+xmin <- min(df$position_bp, na.rm = TRUE) - pad
+xmax <- max(df$position_bp, na.rm = TRUE) + pad
+
+baseline_df <- data.frame(TF = tf_levels, xmin = xmin, xmax = xmax, y0 = 0, y1 = 0)
+
+col_map  <- c("1e-5" = "lightcoral",  
+              "1e-4" = "orange",      
+              "1e-3" = "gold")        
+size_map <- c("1e-5" = 4.8,  
+              "1e-4" = 4.0,
+              "1e-3" = 3.0)
+
+# ---- Plot ----
+p <- ggplot(df, aes(x = position_bp, y = 1)) +
+
+  geom_segment(data = baseline_df,
+               aes(x = xmin, xend = xmax, y = y0, yend = y1),
+               inherit.aes = FALSE, color = "grey40", linewidth = 0.9) +
+
+  geom_segment(aes(x = position_bp, xend = position_bp, y = 0, yend = 1,
+                   color = p_class),
+               linewidth = 0.7, na.rm = TRUE) +
+
+  geom_point(aes(color = p_class, size = p_class),
+             alpha = 0.95, na.rm = TRUE) +
+  
+  scale_color_manual(name = "p-value threshold", values = col_map, drop = FALSE) +
+  scale_size_manual(name  = "p-value threshold", values = size_map, drop = FALSE) +
+  scale_x_continuous("", breaks = pretty_breaks()) +
+  scale_y_continuous(NULL, breaks = NULL, limits = c(0, 1.1)) +
+  coord_cartesian(xlim = c(xmin, xmax), clip = "off") +
+  facet_grid(rows = vars(TF), switch = "y") +
+  theme_minimal(base_size = 13) +
+  theme(
+    legend.position = "bottom",
+    strip.placement = "outside",
+    strip.text.y.left = element_text(angle = 0, face = "bold"),
+    panel.spacing.y = unit(6, "pt"),
+    plot.title = element_text(face = "bold")
+  ) +
+  labs(title = "")
+
+print(p)
