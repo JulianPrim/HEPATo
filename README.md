@@ -9,7 +9,7 @@ An interactive R Shiny viewer for HepG2 cells that overlays ENCODE cCREs with Ch
 In RStudio (not R), click on File -> New File -> Shiny Web App… (single-file app).
 Name it as you like (HEPATo) and create it. This will create a folder on your device with the name you chose. 
 
-Go to the project’s GitHub -> click on "Releases" and download the three pre-formatted ChIP-Atlas and the ENCODE cCREs bed files.
+Go to the project’s GitHub page -> click on "Releases" and download the three pre-formatted ChIP-Atlas and the ENCODE cCREs bed files.
 Place them in the same folder as your app (expected names):
 HepG2_formatted_50_AllAg.bed, HepG2_formatted_50_His.bed, HepG2_formatted_50_ATAC.bed, and the cCRE bigBed.
 
