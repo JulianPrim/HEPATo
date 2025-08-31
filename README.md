@@ -79,6 +79,7 @@ The app will load the file that matches the selected **track** and overlay those
 The error "subscript out of bound" in the legend occurs when the user selects less than three TFs. 
 
 In the graphical output, points are placed at the center of each ChIP-seq signal rather than the peak, since the ChIP-Atlas BED files used here don’t provide the exact peak positions. consequently, the x-coordinate is informative for regional localization but not precise enough for base-pair alignment to exact predicted binding sites. Overlapping peaks can have different genomic lengths. Since positions are drawn at the peak midpoint, they won’t coincide exactly when you zoom in. We recommend verifying the genomic coordinates for any TF binding signal of interest.
+
 <img width="354" height="299" alt="image" src="https://github.com/user-attachments/assets/b613c785-ad9c-41f0-9566-1ae58174ce6e" />
 
 
