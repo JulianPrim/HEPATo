@@ -15,9 +15,9 @@ HepG2_formatted_50_AllAg.bed, HepG2_formatted_50_His.bed, HepG2_formatted_50_ATA
 
 Replace (copy-paste) the template with the app code (the “Raw_codeV2.0.0”) and save as app.R in that folder.
 
-The script starts with a package installation chunk. Use it once (click Run App), then comment it out (#) to prevent reinstalling packages on later runs.
+The script starts by installing packages. Use the viewer once (click Run App). Then, for later uses, inactivate the packages installation code block, by putting hashtags (#) in front of the lines to prevent reinstalling packages. Just press Run app again.
 
-Or run the script line by line (Command+Enter for mac).
+In case Run app fails to execute properly , you run the script line by line from the beginning (maintain Command+Enter for mac).
 
 If you use this viewer, please read the notes at the end.
 ---------------------------------------------------------------------------------------
