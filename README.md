@@ -19,7 +19,7 @@ The script starts with a package installation chunk. Use it once (click Run App)
 
 Or run the script line by line (Command+Enter for mac).
 
-If you’re using this viewer, please read the notes at the end. Enjoy!
+If you use this viewer, please read the notes at the end.
 ---------------------------------------------------------------------------------------
 <img width="1468" height="893" alt="image" src="https://github.com/user-attachments/assets/5e51c308-cea9-40ef-b48e-de037f776258" />
 <img width="1421" height="755" alt="Capture d’écran 2025-08-28 à 14 22 32" src="https://github.com/user-attachments/assets/50c3f209-c69f-4919-8fce-5f9b0b4f252f" />
