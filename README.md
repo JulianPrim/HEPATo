@@ -83,6 +83,8 @@ In the graphical output, points are placed at the center of each ChIP-seq signal
 <img width="354" height="299" alt="image" src="https://github.com/user-attachments/assets/b613c785-ad9c-41f0-9566-1ae58174ce6e" />
 
 
-Please note that hotspot promoters highly transcribed and accessible are prone to “phantom peaks” arising from biochemical artefacts. Even though the data are from wet lab experiments, they should be considered exploratory leads for cancer regulatory network research. 
+
+
+Please note that hotspot promoters highly transcribed and accessible are prone to “phantom peaks” arising from biochemical artefacts. Even though the data are from wet lab experiments, they should be considered exploratory leads for cancer regulatory network research. For references See PMIDs: 31114922, 24173036, 26117547.
 
  
