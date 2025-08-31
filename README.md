@@ -40,7 +40,7 @@ Date        : 2025-08-27,
 Requirements: R (>=4.2), Bioconductor packages (EnsDb.Hsapiens.v86, etc.)
 Made with   : R 4.5.1, ChatGPT 5 (used for code syntax and development)
 
-## Data sources:
+## Data sources
    - ENCODE Registry of cCREs (hg38), file ENCFF389ZVZ.bigBed, lab: Zhiping Weng, UMass
    - ChIP-Atlas Peak Browser (https://chip-atlas.org) Accessed: 2025-07
    -  Dataset type: ChIP-seq (TFs, histone marks), ATAC-seq
