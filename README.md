@@ -76,7 +76,7 @@ The app will load the file that matches the selected **track** and overlay those
 
 ## Notes of caution
 
-The error "subscript out of bound" in the legend occurs when the user selects less than 3 TFs. 
+The error "subscript out of bound" in the legend occurs when the user selects less than three TFs. 
 
 In this plot, points are placed at the center of each ChIP-seq peak rather than the summit, since the ChIP-Atlas BED files used here don’t provide summit positions. As a result, the x-coordinate is informative for regional localization but not precise enough for base-pair alignment to exact predicted binding sites. Overlapping peaks can have different genomic lengths. Since positions are drawn at the peak midpoint, they won’t coincide exactly when you zoom in. We recommend checking the genomic coordinates for any point of interest.
 
