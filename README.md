@@ -23,9 +23,9 @@ The script starts by installing packages. Use the viewer once (click Run App). T
 
 <img width="612" height="114" alt="image" src="https://github.com/user-attachments/assets/9ca4b71c-f209-465d-9cbe-d946611a0dbf" />
 
-In case Run app fails to execute properly , you run the script line by line from the beginning (maintain Command+Enter for mac).
+In case Run app fails to execute properly, you can run the script line by line from the beginning (maintain Command+Enter for mac).
 
-If you use this viewer, please read the notes at the end.
+If you use this viewer, please read the notes of caution below.
 ---------------------------------------------------------------------------------------
 <img width="1468" height="893" alt="image" src="https://github.com/user-attachments/assets/5e51c308-cea9-40ef-b48e-de037f776258" />
 <img width="1421" height="755" alt="Capture d’écran 2025-08-28 à 14 22 32" src="https://github.com/user-attachments/assets/50c3f209-c69f-4919-8fce-5f9b0b4f252f" />
