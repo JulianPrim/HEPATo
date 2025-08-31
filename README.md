@@ -68,12 +68,12 @@ The app will load the file that matches the selected **track** and overlay those
 
 > SRX counts reflect the July-2025 ChIP-Atlas snapshot and may change as the resource updates.
 
-## Caution notes 
+## Notes of caution
 
 The error "subscript out of bound" in the legend happens when the user selects less than 3 TFs. 
 
 In this plot, points are placed at the center of each ChIP-seq peak rather than the summit, since the ChIP-Atlas BED files used here don’t provide summit positions. As a result, the x-coordinate is informative for regional localization but not precise enough for base-pair alignment to exact predicted binding sites. Overlapping peaks can have different genomic lengths. Since positions are drawn at the peak midpoint, they won’t coincide exactly when you zoom in. We recommend checking the genomic coordinates for any point of interest.
 
-Hotspot promoters highly transcribed and accessible are prone to “phantom peaks” arising from biochemical artifacts. Even though the data are from wet lab experiments, they should be considered exploratory leads for cancer regulatory network research. 
+Hotspot promoters highly transcribed and accessible are prone to “phantom peaks” arising from biochemical artefacts. Even though the data are from wet lab experiments, they should be considered exploratory leads for cancer regulatory network research. 
 
 Contact the corresponding author of the review for any questions, we're happy to answer. 
