@@ -82,7 +82,10 @@ In the graphical output, points are placed at the center of each ChIP-seq signal
 
 <img width="666" height="560" alt="image" src="https://github.com/user-attachments/assets/cd40c5b4-2dff-42e0-a394-27b90f45a362" />
 
-Here 
+
+
+
+la colonne score des BED fournis par le Peak Browser de ChIP-Atlas est le score MACS2 (–10·log10 de la q-value), formaté dans la colonne 5 du BED9; il sert surtout au classement/affichage des pics et n’est pas destiné à des comparaisons quantitatives directes entre études à protocole différent.
 It is a ranking/visualization aid, not a raw MACS2 statistic (qValue, pValue, or signalValue). Because different studies (SRXs) use different antibodies, sequencing depths, and pipelines, this score is not comparable across SRXs. It is reasonable only for within-study (same SRX) comparisons to rank peaks.
 
 Please note that hotspot promoters highly transcribed and accessible are prone to “phantom peaks” arising from biochemical artefacts. Even though the data are from wet lab experiments, they should be considered exploratory leads for cancer regulatory network research. For references See PMIDs: 31114922, 24173036, 26117547.
