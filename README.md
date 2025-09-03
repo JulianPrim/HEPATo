@@ -1,6 +1,6 @@
 
 # HEPATo (HepG2 Promoter Analysis Tool)
-An interactive R Shiny viewer for HepG2 cells that combines ENCODE candidate Cis Regulatory Elements (cCREs) with ChIP-Atlas transcription factors, histone marks, and ATAC-seq data within currently annotated HGNC genes to facilitate exploring regulatory networks in liver cancer cells.
+An interactive R Shiny viewer for HepG2 cells that combines ENCODE candidate Cis Regulatory Elements (cCREs) with ChIP-Atlas transcription factors, histone marks, and ATAC-seq data within currently annotated HGNC genes to facilitate exploring regulatory networks in liver cancer cells and to easily produce elegant ChIP-seq figures.
 
 
 ---------------------------------------------------------------------------------------
@@ -85,8 +85,7 @@ In the graphical output, points are placed at the center of each ChIP-seq signal
 
 
 
-la colonne score des BED fournis par le Peak Browser de ChIP-Atlas est le score MACS2 (–10·log10 de la q-value), formaté dans la colonne 5 du BED9; il sert surtout au classement/affichage des pics et n’est pas destiné à des comparaisons quantitatives directes entre études à protocole différent.
-It is a ranking/visualization aid, not a raw MACS2 statistic (qValue, pValue, or signalValue). Because different studies (SRXs) use different antibodies, sequencing depths, and pipelines, this score is not comparable across SRXs. It is reasonable only for within-study (same SRX) comparisons to rank peaks.
+The score column in Peak Browser BEDs is the MACS2 display score (–10·log10 q-value, capped ~0–1000) in BED9 field 5. It’s a ranking/visualization aid not a raw MACS2 statistic (qValue/pValue/signalValue) for cross-study quantitation. Use it only for within-study (same SRX) peak ranking; do not compare across SRXs.
 
 Please note that hotspot promoters highly transcribed and accessible are prone to “phantom peaks” arising from biochemical artefacts. Even though the data are from wet lab experiments, they should be considered exploratory leads for cancer regulatory network research. For references See PMIDs: 31114922, 24173036, 26117547.
 
