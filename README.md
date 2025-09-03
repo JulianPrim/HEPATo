@@ -6,18 +6,18 @@ An interactive R Shiny viewer for HepG2 cells that combines ENCODE candidate Cis
 ---------------------------------------------------------------------------------------
 ## How to run the viewer locally
 
-In RStudio (not R), click on File -> New File -> Shiny Web App… (single-file app).
+1. In RStudio (not R), click on File -> New File -> Shiny Web App… (single-file app).
 Name it as you like (HEPATo) and create it. This will create a folder on your device with the name you chose. 
 
 <img width="504" height="200" alt="image" src="https://github.com/user-attachments/assets/b9322cd5-da8e-4139-95ef-5a5e43106675" />
 
-Go to the project’s GitHub page -> click on "Releases" and download the three pre-formatted ChIP-Atlas and the ENCODE cCREs bed files.
+2. Go to the project’s GitHub page -> click on "Releases" and download the three pre-formatted ChIP-Atlas and the ENCODE cCREs bed files.
 Place them in the same folder as your app (expected names):
 HepG2_formatted_50_AllAg.bed, HepG2_formatted_50_His.bed, HepG2_formatted_50_ATAC.bed, and the cCRE bigBed.
 
 <img width="428" height="118" alt="image" src="https://github.com/user-attachments/assets/8aa8bf2e-f616-4f9d-90ce-4dca55a0cd64" />
 
-Replace (copy-paste) the template in the Rstudio script with the app code (the “RawCode_v.1.0.0”) and save as app.R in that folder.
+3. Replace (copy-paste) the template in the Rstudio script with the app code (the “RawCode_v.1.0.0”) and save as app.R in that folder.
 
 The script starts by installing packages. Use the viewer once (click Run App). Then, for later uses, inactivate the packages installation code block, by putting hashtags (#) in front of the lines to prevent reinstalling packages. Just press Run app again.
 
