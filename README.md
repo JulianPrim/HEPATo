@@ -17,7 +17,9 @@ HepG2_formatted_50_AllAg.bed, HepG2_formatted_50_His.bed, HepG2_formatted_50_ATA
 
 <img width="428" height="118" alt="image" src="https://github.com/user-attachments/assets/8aa8bf2e-f616-4f9d-90ce-4dca55a0cd64" />
 
-3. Replace (copy-paste) the template in the Rstudio script with the app code (the “RawCode_v.1.0.0”) and save as app.R in that folder.
+3. In RStudio, session -> set working directory -> choose directory -> select the folder
+   
+4. Replace (copy-paste) the template in the Rstudio script with the app code (the “RawCode_v.1.0.0”) and save as app.R in that folder.
 
 The script starts by installing packages. Use the viewer once (click Run App). Then, for later uses, inactivate the packages installation code block, by putting hashtags (#) in front of the lines to prevent reinstalling packages. Just press Run app again.
 
