@@ -10,6 +10,7 @@
 # Repository  : https://github.com/JulianPrim/HEPATo
 # Date        : 2025-08-27
 # Requirements: R (>=4.2), Bioconductor packages (EnsDb.Hsapiens.v86, etc.)
+# Made with: R 4.5.1 and chatGPT5 have been used for code syntax and development (paste previous codes and errors and ask for improvements)
 ###############################################################
 
 # ---- Inputs expected in working directory ----
@@ -29,7 +30,7 @@ BiocManager::install(c("EnsDb.Hsapiens.v86","GenomicRanges","IRanges","rtracklay
 library(shiny)
 library(bslib)
 library(EnsDb.Hsapiens.v86)
-library(AnnotationFilter)   
+library(AnnotationFilter)
 library(GenomicRanges)
 library(IRanges)
 library(rtracklayer)
@@ -80,7 +81,6 @@ theme <- bs_theme(
 ui <- page_navbar(
   theme = theme,
   title = tags$span("HEPATo: HepG2 Promoter Analysis Tool"),
-  # Assure aussi le titre de l’onglet navigateur
   tags$head(tags$title("HEPATo: HepG2 Promoter Analysis Tool")),
   # CSS
   tags$head(
@@ -115,7 +115,7 @@ ui <- page_navbar(
         tags$div(class="mb-3",
                  tags$h2("Inputs", class="h5 fw-bold mb-3"),
                  textInput("gene", "Gene name (HGNC)", "EXOSC10"),
-                 numericInput("flank", "Flank (bp)", 2000, min = 0),
+                 numericInput("flank", "Flanking sequences (bp)", 2000, min = 0),
                  radioButtons("mode", "Track:", inline = TRUE,
                               choices = c("Transcription factors"="tf","Histone marks"="his","ATAC-seq"="atac"),
                               selected = "tf"),
@@ -137,9 +137,9 @@ ui <- page_navbar(
           tags$div(
             tags$div(class = "app-title", "HEPATo: HepG2 Promoter Analysis Tool"),
             tags$div(class = "app-subtitle-lead",
-                     "Interactive viewer for exploring regulatory landscapes in HepG2 cells. ",
+                     "Interactive viewer for exploring regulatory landscapes in HepG2 cells and generating elegant ChIP-seq figures. ",
                      "Browse ENCODE cCREs alongside ChIP-Atlas transcription-factor binding, histone marks, and ATAC-seq around any HGNC gene. ",
-                     "Configure the flanking window, filter by factor/mark, and inspect MACS2 peak scores."),
+                     "Configure the flanking window, filter by factor/mark, and inspect peak scores."),
             tags$div(class = "app-subtitle-more text-muted",
                      "With plotly (v2.11.1), you can lasso-select points, zoom, and pan. ",
                      "Enter a gene and click \"Display\". ",
@@ -155,7 +155,12 @@ ui <- page_navbar(
         card_body(
           div(class="hide-on-fullscreen",
               actionLink("toggle_hot", "Note about hotspot promoters", class = "link-primary"),
-              uiOutput("hotNote")),
+              uiOutput("hotNote"),
+              tags$span(" · "),
+              # ---- NEW: MACS2 score note toggle + container
+              actionLink("toggle_macs", "Note about MACS2 score", class = "link-primary"),
+              uiOutput("macsNote")
+          ),
           div(class="plot-wrapper", plotlyOutput("plot", height = "100%")),
           div(class="hide-on-fullscreen",
               uiOutput("ccreLegend"),
@@ -218,7 +223,7 @@ server <- function(input, output, session){
         "<br>Mark/TF: ", gene,
         "<br>SRX: ", SRX,
         "<br>", chrom, ":", start, "-", end,
-        "<br>Score: ", score
+        "<br>Score (narrowPeak, 0–1000): ", score
       )
     )
   })
@@ -289,13 +294,14 @@ server <- function(input, output, session){
         margin = list(l = 96, r = 28, t = 64, b = 72),
         xaxis  = list(title = paste0(as.character(seqnames(gr)), ":", start(gr), "-", end(gr)),
                       automargin = TRUE),
-        yaxis  = list(title = list(text = "<b>MACS2 binding score</b>"),
+        # ---- Y axis label clarified
+        yaxis  = list(title = list(text = "<b>narrowPeak score (0–1000)</b>"),
                       automargin = TRUE)
       ) %>%
       config(displaylogo = FALSE, responsive = TRUE)
   })
   
-  # cCRE legend (contextual) + clickable color help
+  # contextual cCRE legend 
   ccre_help_open <- reactiveVal(FALSE)
   observeEvent(input$ccre_help_toggle, { ccre_help_open(!ccre_help_open()) })
   output$ccreLegend <- renderUI({
@@ -338,7 +344,7 @@ server <- function(input, output, session){
     )
   })
   
-  # Custom TF/mark legend (scrollable)
+  # Custom TF mark legend 
   output$tfLegend <- renderUI({
     if (!isTRUE(input$showlegend) || input$mode == "atac") return(NULL)
     cols <- legend_colors()
@@ -354,7 +360,7 @@ server <- function(input, output, session){
              tags$div(class="tf-legend-grid", items))
   })
   
-  # HOT promoter note (above plot)
+  # HOT promoter note 
   hot_open <- reactiveVal(FALSE)
   observeEvent(input$toggle_hot, { hot_open(!hot_open()) })
   output$hotNote <- renderUI({
@@ -362,7 +368,7 @@ server <- function(input, output, session){
     tags$div(class="note-box", HTML("
 <ul style='margin:6px 0 0 18px'>
   <li><b>Highly open, strongly transcribed promoters</b> (CpG islands, Pol II, H3K4me3/H3K27ac) can yield non-specific enrichments (“phantom peaks”).</li>
-  <li><b>Physicochemical features of HOT regions</b> (high GC/CpG, R-loops, G-quadruplexes) may inflate MACS2 scores.</li>
+  <li><b>Physicochemical features of HOT regions</b> (high GC/CpG, R-loops, G-quadruplexes) may inflate scores.</li>
   <li><b>Large ZNF family</b> and shared cofactors lead to frequent co-IP at transcriptional hubs.</li>
   <li><b>Multi-study aggregation</b> can amplify apparent ubiquity at HOT promoters.</li>
   <li><b>3D proximity/looping</b> may project signal near active TSSs. See PMIDs: 31114922, 24173036, 26117547.</li>
@@ -373,7 +379,25 @@ server <- function(input, output, session){
 "))
   })
   
-  # Treatments note (below plot)
+  # MACS2 / narrowPeak score comparability note 
+  macs_open <- reactiveVal(FALSE)
+  observeEvent(input$toggle_macs, { macs_open(!macs_open()) })
+  output$macsNote <- renderUI({
+    if (!macs_open()) return(NULL)
+    tags$div(class = "note-box", HTML("
+<ul style='margin:6px 0 0 18px'>
+  <li><b>Displayed score = <code>narrowPeak</code> (0–1000)</b>, derived from MACS2 and optimized for <em>visualization/ranking</em>.</li>
+  <li><b>Not a raw statistic</b> (<em>pValue</em>, <em>qValue</em>, <em>signalValue</em>) and <b>not comparable across studies</b> (different SRXs).</li>
+  <li>Scale varies with antibody, sequencing depth, controls, MACS2 parameters, and processing pipelines.</li>
+  <li><b>Reasonable comparison:</b> <u>within the same SRX</u> to rank peaks. Do not infer that TF A “binds more” than TF B across SRXs.</li>
+</ul>
+<div style='margin-top:6px;font-size:0.9em;color:#555'>
+  Tip: use this score as a <em>presence/priority cue</em>, not as a cross-SRX intensity measure.
+</div>
+"))
+  })
+  
+  # Treatments note
   show_note <- reactiveVal(FALSE)
   observeEvent(input$toggle_note, { show_note(!show_note()) })
   output$noteBox <- renderUI({
@@ -398,3 +422,4 @@ server <- function(input, output, session){
 }
 
 shinyApp(ui, server)
+
