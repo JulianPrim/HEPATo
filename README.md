@@ -1,6 +1,6 @@
 
 # HEPATo (HepG2 Promoter Analysis Tool)
-An interactive R Shiny viewer for HepG2 cells that combines ENCODE candidate Cis Regulatory Elements (cCREs) with ChIP-Atlas transcription factors, histone marks, and ATAC-seq data within currently annotated HGNC genes to facilitate exploring regulatory networks in liver cancer cells and to easily produce elegant ChIP-seq figures. This tool is to help generate hypothesis are confirm existing results. 
+An interactive R Shiny viewer for HepG2 cells that combines ENCODE candidate Cis Regulatory Elements (cCREs) with ChIP-Atlas transcription factors, histone marks, and ATAC-seq data within currently annotated HGNC genes to facilitate exploring regulatory networks in liver cancer cells and to easily produce elegant ChIP-seq figures. This tool is meant to help generate hypothesis or confirm existing results. 
 
 
 ---------------------------------------------------------------------------------------
