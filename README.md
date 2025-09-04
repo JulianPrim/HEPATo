@@ -82,7 +82,7 @@ The error "subscript out of bound" in the legend occurs when the user selects le
 
 In the graphical output, points are placed at the center of each ChIP-seq signal rather than the peak, since the ChIP-Atlas BED files used here don’t provide the exact peak positions. consequently, the x-coordinate is informative for regional localization but not precise enough for base-pair alignment to exact predicted binding sites. Overlapping peaks can have different genomic lengths. Since positions are drawn at the peak midpoint, they won’t coincide exactly when you zoom in. We recommend verifying the genomic coordinates for any TF binding signal of interest.
 
-<img width="666" height="560" alt="image" src="https://github.com/user-attachments/assets/cd40c5b4-2dff-42e0-a394-27b90f45a362" />
+<img width="333" height="280" alt="image" src="https://github.com/user-attachments/assets/cd40c5b4-2dff-42e0-a394-27b90f45a362" />
 
 
 
