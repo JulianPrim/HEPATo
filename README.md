@@ -97,4 +97,14 @@ The score column in Peak Browser BEDs is the MACS2 display score (–10·log10 q
 ### Hotspot promoters can yield false positive 
 Please note that hotspot promoters highly transcribed and accessible are prone to “phantom peaks” arising from biochemical artefacts. Even though the data are from wet lab experiments, they should be considered exploratory leads for cancer regulatory network research. For references See PMIDs: 31114922, 24173036, 26117547.
 
- 
+
+# Citations and licences
+
+ENCODE cCREs: follow ENCODE’s data use policy.
+
+ChIP-Atlas data © DBCLS/ChIP-Atlas. Source: ChIP-Atlas Peak Browser (accessed July 2025).
+Licensed under CC BY 4.0. Changes: filtered to HepG2, reformatted to a 6-column BED schema, content unmodified otherwise.
+License: https://creativecommons.org/licenses/by/4.0/
+
+Oki S, et al. 2024. ChIP-Atlas. Nucleic Acids Research. doi:10.1093/nar/gkae358.
+
