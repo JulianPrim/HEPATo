@@ -1,6 +1,6 @@
 
 # HEPATo (HepG2 Promoter Analysis Tool)
-An interactive R Shiny viewer for HepG2 cells that combines ENCODE candidate Cis Regulatory Elements (cCREs) with ChIP-Atlas transcription factors, histone marks, and ATAC-seq data within currently annotated HGNC genes to facilitate exploring regulatory networks in liver cancer cells and to easily produce elegant ChIP-seq figures.
+An interactive R Shiny viewer for HepG2 cells that combines ENCODE candidate Cis Regulatory Elements (cCREs) with ChIP-Atlas transcription factors, histone marks, and ATAC-seq data within currently annotated HGNC genes to facilitate exploring regulatory networks in liver cancer cells and to easily produce elegant ChIP-seq figures. This tool is to help generate hypothesis are confirm existing results. 
 
 
 ---------------------------------------------------------------------------------------
@@ -80,15 +80,18 @@ The app will load the file that matches the selected **track** and overlay those
 
 The error "subscript out of bound" in the legend occurs when the user selects less than three TFs. 
 
+
+# HEPATo plots peaks midpoint
 In the graphical output, points are placed at the center of each ChIP-seq signal rather than the peak, since the ChIP-Atlas BED files used here don’t provide the exact peak positions. consequently, the x-coordinate is informative for regional localization but not precise enough for base-pair alignment to exact predicted binding sites. Overlapping peaks can have different genomic lengths. Since positions are drawn at the peak midpoint, they won’t coincide exactly when you zoom in. We recommend verifying the genomic coordinates for any TF binding signal of interest.
 
 <img width="333" height="280" alt="image" src="https://github.com/user-attachments/assets/cd40c5b4-2dff-42e0-a394-27b90f45a362" />
 
 
 
-
+# MACS2 scores are not comparable accros studies 
 The score column in Peak Browser BEDs is the MACS2 display score (–10·log10 q-value, capped ~0–1000) in BED9 field 5. It’s a ranking/visualization aid not a raw MACS2 statistic (qValue/pValue/signalValue) for cross-study quantitation. Use it only for within-study (same SRX) peak ranking; do not compare across SRXs.
 
+# Hotspot promoters can yield false positive 
 Please note that hotspot promoters highly transcribed and accessible are prone to “phantom peaks” arising from biochemical artefacts. Even though the data are from wet lab experiments, they should be considered exploratory leads for cancer regulatory network research. For references See PMIDs: 31114922, 24173036, 26117547.
 
  
