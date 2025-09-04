@@ -31,7 +31,8 @@ If you use this viewer, please read the notes of caution below.
 ---------------------------------------------------------------------------------------
 <img width="1467" height="897" alt="image" src="https://github.com/user-attachments/assets/2655095b-f849-4a08-bf5b-d3729f899f78" />
 
-<img width="869" height="680" alt="image" src="https://github.com/user-attachments/assets/8f267b1c-59d8-4bf5-9435-22259ecbff57" />
+<img width="864" height="669" alt="image" src="https://github.com/user-attachments/assets/149685f8-233e-4776-87e2-71f4cb8b31c2" />
+
 
 <img width="935" height="246" alt="image" src="https://github.com/user-attachments/assets/5d73ab66-cde9-4035-a090-8fe9a80cc092" />
 
