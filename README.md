@@ -9,7 +9,7 @@ An interactive R Shiny viewer for HepG2 cells that combines ENCODE candidate Cis
 1. In RStudio (not R), click on File -> New File -> Shiny Web App… (single-file app).
 Name it as you like (HEPATo) and create it. This will create a folder on your device with the name you chose. 
 
-<img width="504" height="200" alt="image" src="https://github.com/user-attachments/assets/b9322cd5-da8e-4139-95ef-5a5e43106675" />
+<img width="252" height="100" alt="image" src="https://github.com/user-attachments/assets/b9322cd5-da8e-4139-95ef-5a5e43106675" />
 
 2. Go to the project’s GitHub page -> click on "Releases" and download the three pre-formatted ChIP-Atlas and the ENCODE cCREs bed files.
 Place them in the same folder as your app (expected names):
