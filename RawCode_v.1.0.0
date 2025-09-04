@@ -244,7 +244,7 @@ server <- function(input, output, session){
         "<br>Mark/TF: ", gene,
         "<br>SRX: <a href='", SRX_URL_BASE, SRX, "' target='_blank'>", SRX, "</a>",
         "<br>", chrom, ":", start, "-", end,
-        "<br>Score (narrowPeak, 0–1000): ", score
+        "<br>Score (MACS2, 0–1000): ", score
       )
     )
   })
