@@ -77,11 +77,11 @@ All peak tracks use a **uniform 6-column BED-like schema**:
 Place these files **next to** `app.R`.  
 The app will load the file that matches the selected **track** and overlay those peaks with **ENCODE cCREs** around the requested **HGNC** gene.
 
+You can click on a point of interest to access metadata on a new tab.
+
 > SRX counts reflect the July-2025 ChIP-Atlas snapshot and may change as the resource updates.
 
 # Notes of caution
-
-The error "subscript out of bound" in the legend occurs when the user selects less than three TFs. 
 
 
 ### HEPATo plots peaks midpoint
@@ -91,8 +91,8 @@ In the graphical output, points are placed at the center of each ChIP-seq signal
 
 
 
-### MACS2 scores are not comparable accros studies 
-The score column in Peak Browser BEDs is the MACS2 display score (–10·log10 q-value, capped ~0–1000) in BED9 field 5. It’s a ranking/visualization aid not a raw MACS2 statistic (qValue/pValue/signalValue) for cross-study quantitation. Use it only for within-study (same SRX) peak ranking; do not compare across SRXs.
+### MACS2 scores are not comparable across studies 
+The score column in Peak Browser BEDs is the MACS2 score (–10·log10 q-value, capped ~0–1000) in BED9 field 5. It’s a ranking/visualization aid not a raw MACS2 statistic (qValue/pValue/signalValue). Use it only for within study (same SRX) peak ranking. Do not compare across SRXs.
 
 ### Hotspot promoters can yield false positive 
 Please note that hotspot promoters highly transcribed and accessible are prone to “phantom peaks” arising from biochemical artefacts. Even though the data are from wet lab experiments, they should be considered exploratory leads for cancer regulatory network research. For references See PMIDs: 31114922, 24173036, 26117547.
