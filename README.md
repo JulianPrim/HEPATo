@@ -5,7 +5,6 @@ An interactive R Shiny viewer for HepG2 cells that combines ENCODE candidate Cis
 
 ---------------------------------------------------------------------------------------
 ## How to run the viewer locally
-<img width="426" height="47" alt="image" src="https://github.com/user-attachments/assets/c7777a28-35cb-4033-b9e2-689f52eb36cf" />
 
 1. In RStudio (not R), click on File -> New File -> Shiny Web App… (single-file app).
 Name it as you like (HEPATo) and create it. This will create a folder on your device with the name you chose. 
