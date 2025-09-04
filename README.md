@@ -15,7 +15,7 @@ Name it as you like (HEPATo) and create it. This will create a folder on your de
 Place them in the same folder as your app (expected names):
 HepG2_formatted_50_AllAg.bed, HepG2_formatted_50_His.bed, HepG2_formatted_50_ATAC.bed, and the cCRE bigBed.
 
-<img width="428" height="118" alt="image" src="https://github.com/user-attachments/assets/8aa8bf2e-f616-4f9d-90ce-4dca55a0cd64" />
+<img width="285" height="78" alt="image" src="https://github.com/user-attachments/assets/8aa8bf2e-f616-4f9d-90ce-4dca55a0cd64" />
 
 3. In RStudio, session -> set working directory -> choose directory -> select the folder
    
@@ -23,7 +23,7 @@ HepG2_formatted_50_AllAg.bed, HepG2_formatted_50_His.bed, HepG2_formatted_50_ATA
 
 The script starts by installing packages. Use the viewer once (click Run App). Then, for later uses, inactivate the packages installation code block, by putting hashtags (#) in front of the lines to prevent reinstalling packages. Just press Run app again.
 
-<img width="612" height="114" alt="image" src="https://github.com/user-attachments/assets/9ca4b71c-f209-465d-9cbe-d946611a0dbf" />
+<img width="408" height="76" alt="image" src="https://github.com/user-attachments/assets/9ca4b71c-f209-465d-9cbe-d946611a0dbf" />
 
 In case Run app fails to execute properly, you can run the script line by line from the beginning (maintain Command+Enter for mac).
 
