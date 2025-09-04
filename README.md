@@ -31,10 +31,9 @@ If you use this viewer, please read the notes of caution below.
 ---------------------------------------------------------------------------------------
 <img width="1469" height="896" alt="image" src="https://github.com/user-attachments/assets/410333e6-3d9f-41b2-8e25-537ebda9b42f" />
 
-<img width="864" height="669" alt="image" src="https://github.com/user-attachments/assets/149685f8-233e-4776-87e2-71f4cb8b31c2" />
+<img width="869" height="678" alt="image" src="https://github.com/user-attachments/assets/a2ed2e36-b27f-4115-aef5-6bea8b2955bf" />
 
-<img width="783" height="244" alt="image" src="https://github.com/user-attachments/assets/ff1ccd50-d510-44b9-8150-c19171457e22" />
-
+<img width="825" height="273" alt="image" src="https://github.com/user-attachments/assets/dd2333c0-53f0-475f-b85c-589ffdac7b94" />
 
 The legend is not exhaustive here
 
