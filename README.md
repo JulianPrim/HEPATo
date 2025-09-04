@@ -29,8 +29,10 @@ In case Run app fails to execute properly, you can run the script line by line f
 
 If you use this viewer, please read the notes of caution below.
 ---------------------------------------------------------------------------------------
-<img width="1468" height="893" alt="image" src="https://github.com/user-attachments/assets/5e51c308-cea9-40ef-b48e-de037f776258" />
-<img width="1421" height="755" alt="Capture d’écran 2025-08-28 à 14 22 32" src="https://github.com/user-attachments/assets/50c3f209-c69f-4919-8fce-5f9b0b4f252f" />
+<img width="1467" height="897" alt="image" src="https://github.com/user-attachments/assets/2655095b-f849-4a08-bf5b-d3729f899f78" />
+
+<img width="869" height="680" alt="image" src="https://github.com/user-attachments/assets/8f267b1c-59d8-4bf5-9435-22259ecbff57" />
+
 <img width="935" height="246" alt="image" src="https://github.com/user-attachments/assets/5d73ab66-cde9-4035-a090-8fe9a80cc092" />
 
 The legend is not exhaustive here
