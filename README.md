@@ -33,8 +33,8 @@ If you use this viewer, please read the notes of caution below.
 
 <img width="864" height="669" alt="image" src="https://github.com/user-attachments/assets/149685f8-233e-4776-87e2-71f4cb8b31c2" />
 
+<img width="783" height="244" alt="image" src="https://github.com/user-attachments/assets/ff1ccd50-d510-44b9-8150-c19171457e22" />
 
-<img width="935" height="246" alt="image" src="https://github.com/user-attachments/assets/5d73ab66-cde9-4035-a090-8fe9a80cc092" />
 
 The legend is not exhaustive here
 
