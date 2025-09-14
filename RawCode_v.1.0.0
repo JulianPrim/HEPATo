@@ -20,10 +20,10 @@
 #   HepG2_formatted_50_ATAC.bed    (ATAC-seq)
 # ------------------------------------------------------------
 
-# options(repos="https://cran.rstudio.com")
-# if (!requireNamespace("BiocManager", quietly=TRUE)) install.packages("BiocManager")
-# install.packages(c("shiny","bslib","dplyr","plotly","RColorBrewer","readr","tibble","htmlwidgets"))
-# BiocManager::install(c("EnsDb.Hsapiens.v86","GenomicRanges","IRanges","rtracklayer","AnnotationFilter"), ask=FALSE)
+options(repos="https://cran.rstudio.com")
+if (!requireNamespace("BiocManager", quietly=TRUE)) install.packages("BiocManager")
+install.packages(c("shiny","bslib","dplyr","plotly","RColorBrewer","readr","tibble","htmlwidgets"))
+BiocManager::install(c("EnsDb.Hsapiens.v86","GenomicRanges","IRanges","rtracklayer","AnnotationFilter"), ask=FALSE)
 
 # ---- Packages ----
 library(shiny)
